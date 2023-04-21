@@ -1,0 +1,33 @@
+import numpy as np
+import matplotlib.pyplot as plt
+# 读取5组tpr和fpr数据
+tprs=[]
+fprs=[]
+for i in range(0, 2):
+    with open('file_x{}.txt'.format(i)) as f:
+        for line in f:
+            value = float(line.strip('[]\n'))
+            fprs=np.append(fprs,value)
+            fprs = np.array(fprs)
+    with open('file_y{}.txt'.format(i)) as f:
+        for line in f:
+            value = float(line.strip('[]\n'))
+            tprs=np.append(tprs,value)
+tprs = np.array(tprs).reshape(-1, 2000)
+fprs = np.array(fprs).reshape(-1, 2000)
+
+# 计算平均值
+mean_tpr = np.mean(tprs,axis=0)
+mean_fpr = np.mean(fprs,axis=0)
+# 绘制ROC曲线
+plt.plot(mean_fpr,mean_tpr , color='blue', lw=2)
+plt.plot([0, 1], [0, 1], color='grey', lw=2, linestyle='--')
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('ROC Curve')
+# roc_auc = auc(fprs, tprs)
+# print(f'AUC: {roc_auc:.3f}')
+# 计算AUC
+
+plt.show()
+
