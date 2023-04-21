@@ -1,0 +1,27 @@
+data1 = readtable('C:\Users\86159\Desktop\roc\RMGCN.eps', 'FileType', 'text','VariableNamingRule', 'preserve');
+data2 = readtable('C:\Users\86159\Desktop\roc\SCMFDD.eps','FileType', 'text','VariableNamingRule', 'preserve');
+% 绘制ROC曲线
+figure;
+hold on;
+% stackedplot(data1(:,1), data1(:,2), '-b', 'LineWidth', 2);
+stackedplot(data1{:,1}, data1{:,2}, '-b', 'LineWidth', 2);
+stackedplot(data2(:,1), data2(:,2), '-r', 'LineWidth', 2);
+% 添加坐标轴标签和标题
+xlabel('False Positive Rate');
+ylabel('True Positive Rate');
+title('ROC Curve Comparison');
+% 添加图例
+legend('RMGCN', 'SCMFDD');
+% 显示图形
+hold off;
+
+
+报错：
+错误使用 stackedplot (第 76 行)
+x 应为以下类型之一:
+
+datetime, duration, double, single, uint8, uint16, uint32, uint64, int8, int16, int32, int64, logical
+
+出错 roc (第 7 行)
+stackedplot(data1{:,1}, data1{:,2}, '-b', 'LineWidth', 2);
+ 
